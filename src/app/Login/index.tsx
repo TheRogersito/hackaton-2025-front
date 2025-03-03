@@ -1,6 +1,5 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { signInWithGoogle } from "@/services/firebaseConfig";
 import { useUserStore } from "../../store/userStore";
 
 export default function Login() {
@@ -17,10 +16,9 @@ export default function Login() {
           name: googleUser.displayName,
           email: googleUser.email,
           photoURL: googleUser.photoURL,
-          role: "sender", 
-      })
-        router.push("/home");
-
+          role: "sender",  // Adjust role accordingly
+        });
+        router.push("/home");  // Redirect after successful login
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
