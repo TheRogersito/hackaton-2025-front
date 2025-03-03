@@ -1,28 +1,37 @@
 "use client";
 
-import { updateUser } from "@/services/usersFirebase";
+import { createUser, updateUser } from "@/services/usersFirebase";
 import { useUserStore } from "@/store/userStore";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const RegisterData = () => {
-    const router = useRouter()
+  const router = useRouter();
   const [formData, setFormData] = useState({
     phoneNumber: "",
     address: "",
+    patientName: "",
   });
-  const {user, setUser} = useUserStore()
+
+  const { user, setUser } = useUserStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("User Data:", formData);
-    updateUser(user.uid, {...user, phoneNumber: formData.phoneNumber, address: formData.address})
-    alert("Form submitted!");
-    router.push("/home")
+
+    try {
+      setUser({ ...user, ...formData }); // Update store
+      await createUser({ ...user, ...formData });
+      alert("Form submitted!");
+      router.push("/home");
+    } catch (error) {
+      console.error("Error updating user:", error);
+      alert("Failed to submit form.");
+    }
   };
 
   return (
@@ -43,7 +52,7 @@ const RegisterData = () => {
           />
         </label>
 
-        <label className="block mb-4">
+        <label className="block mb-2">
           Address:
           <input
             type="text"
@@ -51,6 +60,19 @@ const RegisterData = () => {
             value={formData.address}
             onChange={handleChange}
             placeholder="Enter your address"
+            className="border p-2 rounded w-full"
+            required
+          />
+        </label>
+
+        <label className="block mb-4">
+          Patient Name:
+          <input
+            type="text"
+            name="patientName"
+            value={formData.patientName}
+            onChange={handleChange}
+            placeholder="Enter patient's name"
             className="border p-2 rounded w-full"
             required
           />

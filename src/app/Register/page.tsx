@@ -12,10 +12,9 @@ export default function Register() {
         try {
             const user = await signInWithGoogle();
             if (user) {
-                console.log(user)
                 setUser({
                     uid: user.uid,
-                    name: user.displayName,
+                    tutorName: user.displayName,
                     email: user.email,
                     photoURL: user.photoURL,
                     role: "sender", 

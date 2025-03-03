@@ -5,12 +5,6 @@ import { useUserStore } from "../../store/userStore";
 
 export default function Login() {
   const router = useRouter();
-  const setUser = useUserStore((state) => state.setUser);
-
-import {signInWithGoogle}  from "@/services/firebaseConfig";
-
-export default function Login() {
-  const router = useRouter();
   const {setUser} = useUserStore()
 
 
@@ -44,4 +38,4 @@ export default function Login() {
       </button>
     </div>
   );
-}  }
+}
