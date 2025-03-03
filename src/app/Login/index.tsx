@@ -2,6 +2,8 @@
 import { useRouter } from "next/navigation";
 import { useUserStore } from "../../store/userStore";
 import { signInWithGoogle } from "@/services/firebaseConfig";
+import { FcGoogle } from "react-icons/fc";
+
 
 export default function Login() {
   const router = useRouter();
@@ -33,6 +35,7 @@ export default function Login() {
         onClick={handleLogin}
         className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600"
       >
+          <FcGoogle className="text-xl" /> 
         Iniciar sesión con Google
       </button>
     </div>
