@@ -20,10 +20,6 @@ export default function Home() {
     };
 
 
-    useEffect(()=>{
-        console.log(user)
-    },[])
-
     return (
         <div className="flex flex-col items-center justify-center h-screen">
             <h1 className="text-2xl font-bold mb-2">Bienvenido, {user.name}</h1>

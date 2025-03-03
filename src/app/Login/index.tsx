@@ -5,39 +5,54 @@ import { useUserStore } from "../../store/userStore";
 
 export default function Login() {
   const router = useRouter();
-  const setUser = useUserStore((state) => state.setUser);
-
-import {signInWithGoogle}  from "@/services/firebaseConfig";
-
-export default function Login() {
-  const router = useRouter();
-  const {user, setUser} = useUserStore()
-
+<<<<<<< HEAD
+  const { setUser } = useUserStore(); // Accessing setUser from the store
 
   const handleLogin = async () => {
     try {
       const user = await signInWithGoogle();
 
       if (user) {
-
-        setUser(user); 
-
-        if (user.role === "funcionario") {
-          router.push("/emergency");
-        } else {
-          router.push("/home");
-        }
-
-        console.log(user)
+        // Set user data to the store
         setUser({
           uid: user.uid,
           name: user.displayName,
           email: user.email,
           photoURL: user.photoURL,
+          role: "sender",  // Adjust role accordingly
+        });
+=======
+  const setUser = useUserStore((state) => state.setUser);
+
+import {signInWithGoogle}  from "@/services/firebaseConfig";
+
+export default function Login() {
+  const router = useRouter();
+  const {setUser} = useUserStore()
+
+
+  const handleLogin = async () => {
+    try {
+      const googleUser = await signInWithGoogle();
+      if (googleUser) {
+        setUser({
+          uid: googleUser.uid,
+          name: googleUser.displayName,
+          email: googleUser.email,
+          photoURL: googleUser.photoURL,
           role: "sender", 
       })
         router.push("/home");
+>>>>>>> 770d2cf5d6ea6943a96ef4c3a32b86b9425573f8
 
+        // Redirect user based on role
+        if (user.role === "funcionario") {
+          router.push("/emergency");
+        } else {
+          router.push("/home");
+        }
+        
+        console.log(user);
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
@@ -55,4 +70,4 @@ export default function Login() {
       </button>
     </div>
   );
-}  }
+}
