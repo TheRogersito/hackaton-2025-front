@@ -13,6 +13,13 @@ export default function Register() {
             const user = await signInWithGoogle();
             if (user) {
                 console.log(user)
+                setUser({
+                    uid: user.uid,
+                    name: user.displayName,
+                    email: user.email,
+                    photoURL: user.photoURL,
+                    role: "sender", 
+                })
                 router.push("/Home");
             }
         } catch (error) {

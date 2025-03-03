@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, setPersistence, browserLocalPersistence } from 'firebase/auth';
+import { getAuth, setPersistence, browserLocalPersistence, signOut } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 
@@ -31,3 +31,5 @@ export const signInWithGoogle = () => {
         return result.user;
     });
 }
+
+export const logout = async () => await signOut(auth);
