@@ -1,35 +1,11 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "../../store/userStore";
-import {signInWithGoogle}  from "../../services/firebaseConfig";
-
-
-export default function Login() {
-  const router = useRouter();
-<<<<<<< HEAD
-  const { setUser } = useUserStore(); // Accessing setUser from the store
-
-  const handleLogin = async () => {
-    try {
-      const user = await signInWithGoogle();
-
-      if (user) {
-        // Set user data to the store
-        setUser({
-          uid: user.uid,
-          name: user.displayName,
-          email: user.email,
-          photoURL: user.photoURL,
-          role: "sender",  // Adjust role accordingly
-        });
-=======
-  const setUser = useUserStore((state) => state.setUser);
-
+import { signInWithGoogle } from "../../services/firebaseConfig";
 
 export default function Login() {
   const router = useRouter();
-  const {setUser} = useUserStore()
-
+  const setUser = useUserStore((state) => state.setUser); // Accessing setUser from the store
 
   const handleLogin = async () => {
     try {
@@ -40,10 +16,9 @@ export default function Login() {
           name: googleUser.displayName,
           email: googleUser.email,
           photoURL: googleUser.photoURL,
-          role: "sender", 
-      })
-        router.push("/home");
-
+          role: "sender",  // Adjust role accordingly
+        });
+        router.push("/home");  // Redirect after successful login
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
