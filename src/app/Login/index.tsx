@@ -7,11 +7,19 @@ export default function Login() {
   const router = useRouter();
   const setUser = useUserStore((state) => state.setUser);
 
+import {signInWithGoogle}  from "@/services/firebaseConfig";
+
+export default function Login() {
+  const router = useRouter();
+  const {user, setUser} = useUserStore()
+
+
   const handleLogin = async () => {
     try {
       const user = await signInWithGoogle();
 
       if (user) {
+
         setUser(user); 
 
         if (user.role === "funcionario") {
@@ -19,6 +27,17 @@ export default function Login() {
         } else {
           router.push("/home");
         }
+
+        console.log(user)
+        setUser({
+          uid: user.uid,
+          name: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+          role: "sender", 
+      })
+        router.push("/home");
+
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
@@ -36,4 +55,4 @@ export default function Login() {
       </button>
     </div>
   );
-}
+}  }

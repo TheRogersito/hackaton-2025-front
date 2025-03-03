@@ -1,14 +1,28 @@
 "use client";
 import { useUserStore } from "../../store/userStore";
 import { useRouter } from "next/navigation";
+import { logout } from "../../services/firebaseConfig";
+import { useEffect } from "react";
+
 
 export default function Home() {
     const user = useUserStore((state) => state.user);
     const router = useRouter();
 
+
     if (!user) {
         return <p className="text-center mt-10 text-gray-500">Cargando...</p>;
     }
+
+    const handleLogout = async () => {
+        await logout();
+        router.push("/");
+    };
+
+
+    useEffect(()=>{
+        console.log(user)
+    },[])
 
     return (
         <div className="flex flex-col items-center justify-center h-screen">
