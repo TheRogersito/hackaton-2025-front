@@ -25,7 +25,7 @@ export const auth = getAuth(app);
 setPersistence(auth, browserLocalPersistence);
 
 
-export const loginWithGoogle = () => {
+export const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     return signInWithPopup(auth, provider).then(result => {
         return result.user;
