@@ -2,7 +2,6 @@
 import { useUserStore } from "../../store/userStore";
 import { useRouter } from "next/navigation";
 import { logout } from "../../services/firebaseConfig";
-import { useEffect } from "react";
 
 
 export default function Home() {

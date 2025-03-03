@@ -1,6 +1,6 @@
 "use client";
 
-import { createUser, updateUser } from "@/services/usersFirebase";
+import { createUser } from "@/services/usersFirebase";
 import { useUserStore } from "@/store/userStore";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
