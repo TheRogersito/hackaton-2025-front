@@ -1,7 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { signInWithGoogle } from "@/services/firebaseConfig";
 import { useUserStore } from "../../store/userStore";
+import {signInWithGoogle}  from "../../services/firebaseConfig";
+
 
 export default function Login() {
   const router = useRouter();
@@ -24,7 +25,6 @@ export default function Login() {
 =======
   const setUser = useUserStore((state) => state.setUser);
 
-import {signInWithGoogle}  from "@/services/firebaseConfig";
 
 export default function Login() {
   const router = useRouter();
@@ -43,16 +43,7 @@ export default function Login() {
           role: "sender", 
       })
         router.push("/home");
->>>>>>> 770d2cf5d6ea6943a96ef4c3a32b86b9425573f8
 
-        // Redirect user based on role
-        if (user.role === "funcionario") {
-          router.push("/emergency");
-        } else {
-          router.push("/home");
-        }
-        
-        console.log(user);
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
