@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "../../store/userStore";
+import { signInWithGoogle } from "@/services/firebaseConfig";
 
 export default function Login() {
   const router = useRouter();
