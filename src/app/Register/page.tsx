@@ -1,7 +1,10 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { signInWithGoogle } from '../../services/firebaseConfig'
-import { useUserStore } from "@/store/userStore";
+import { useUserStore } from "@/store/userStore";import { FcGoogle } from "react-icons/fc";
+import { FcGoogle } from "react-icons/fc";
+
+
 
 
 export default function Register() {
