@@ -20,7 +20,7 @@ export default function Register() {
                     photoURL: user.photoURL,
                     role: "sender", 
                 })
-                router.push("/Home");
+                router.push("/RegisterData");
             }
         } catch (error) {
             console.error("Error en el registro:", error);

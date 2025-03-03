@@ -5,18 +5,17 @@ import { useUserStore } from "@/store/userStore";
 
 export default function Login() {
   const router = useRouter();
-  const {user, setUser} = useUserStore()
+  const {setUser} = useUserStore()
 
   const handleLogin = async () => {
     try {
-      const user = await signInWithGoogle();
-      if (user) {
-        console.log(user)
+      const googleUser = await signInWithGoogle();
+      if (googleUser) {
         setUser({
-          uid: user.uid,
-          name: user.displayName,
-          email: user.email,
-          photoURL: user.photoURL,
+          uid: googleUser.uid,
+          name: googleUser.displayName,
+          email: googleUser.email,
+          photoURL: googleUser.photoURL,
           role: "sender", 
       })
         router.push("/home");

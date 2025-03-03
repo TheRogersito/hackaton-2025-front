@@ -3,7 +3,7 @@ import { getAuth, setPersistence, browserLocalPersistence, signOut } from 'fireb
 import { getFirestore } from 'firebase/firestore';
 import { GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 
-export { collection, doc, addDoc, getDoc, setDoc, getDocs, query, updateDoc, deleteDoc, where, onSnapshot, documentId } from "firebase/firestore";
+export { collection, doc, addDoc, getDoc, setDoc, getDocs, query, updateDoc, deleteDoc, where, documentId } from "firebase/firestore";
 export { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, fetchSignInMethodsForEmail, sendEmailVerification } from "firebase/auth";
 export { uploadBytes, getDownloadURL, ref } from "firebase/storage";
 

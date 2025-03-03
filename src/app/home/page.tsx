@@ -2,21 +2,14 @@
 
 import { useRouter } from "next/navigation";
 import { logout } from "../../services/firebaseConfig";
-import { useUserStore } from "@/store/userStore";
-import { useEffect } from "react";
 
 export default function Home() {
     const router = useRouter();
-    const {user} = useUserStore()
 
     const handleLogout = async () => {
         await logout();
         router.push("/");
     };
-
-    useEffect(()=>{
-        console.log(user)
-    },[])
 
     return (
         <div className="flex flex-col items-center justify-center h-screen">
