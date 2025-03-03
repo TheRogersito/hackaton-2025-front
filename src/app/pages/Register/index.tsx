@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { signInWithGoogle } from '../../services/firebaseConfig'
 import { useUserStore } from "@/store/userStore";
 
+
 export default function Register() {
     const router = useRouter();
     const {setUser} = useUserStore();

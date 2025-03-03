@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { logout } from "../../services/firebaseConfig";
+import { logout } from "../../../services/firebaseConfig";
 
 export default function Home() {
     const router = useRouter();
