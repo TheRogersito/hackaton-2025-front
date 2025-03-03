@@ -1,15 +1,24 @@
 "use client";
 import { useRouter } from "next/navigation";
-import {signInWithGoogle}  from "@/services/firebaseConfig";
+import { signInWithGoogle } from "@/services/firebaseConfig";
+import { useUserStore } from "../../store/userStore";
 
 export default function Login() {
   const router = useRouter();
+  const setUser = useUserStore((state) => state.setUser);
 
   const handleLogin = async () => {
     try {
       const user = await signInWithGoogle();
+
       if (user) {
-        router.push("/Home");
+        setUser(user); 
+
+        if (user.role === "funcionario") {
+          router.push("/emergency");
+        } else {
+          router.push("/home");
+        }
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
