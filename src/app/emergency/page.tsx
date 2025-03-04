@@ -7,7 +7,7 @@ import EmergencyCard from "./EmergencyCard";
 interface Emergency {
     id: string;
     name: string;
-    lastname: string;
+    lastName: string; // Se corrige a `lastName`
     signalStatus: "online" | "offline";
     location: {
         lat: number;
@@ -22,7 +22,10 @@ export default function Emergency() {
         const unsubscribe = onSnapshot(collection(db, "emergencies"), (snapshot) => {
             const emergencyList = snapshot.docs.map((doc) => ({
                 id: doc.id,
-                ...doc.data(),
+                name: doc.data().name ?? "Desconocido", // Se asegura que haya un valor
+                lastName: doc.data().lastName ?? "No disponible", // Se asegura que haya un valor
+                signalStatus: doc.data().signalStatus ?? "offline", // Se asegura un estado por defecto
+                location: doc.data().location ?? { lat: 0, lng: 0 }, // Se asegura que haya una ubicación válida
             })) as Emergency[];
 
             setEmergencies(emergencyList); 
@@ -38,7 +41,7 @@ export default function Emergency() {
             {emergencies.length === 0 ? (
                 <p className="text-gray-500">No hay emergencias registradas.</p>
             ) : (
-                emergencies.map((emergency) => <EmergencyCard emergency={emergency} key={emergency.id}/>)
+                emergencies.map((emergency) => <EmergencyCard emergency={emergency} key={emergency.id} />)
             )}
         </div>
     );

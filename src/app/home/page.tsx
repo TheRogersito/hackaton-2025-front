@@ -3,6 +3,7 @@ import { useUserStore } from "../../store/userStore";
 import { useRouter } from "next/navigation";
 import { addDoc, collection, db, logout } from "../../services/firebaseConfig";
 import { useEffect } from "react";
+import type { Emergency } from "../emergency/EmergencyCard";
 
 export default function Home() {
     const user = useUserStore((state) => state.user);
@@ -15,28 +16,29 @@ export default function Home() {
         }
     }, [user, router]);
 
-    const createEmergency = async (emergency) => {
+    const createEmergency = async (emergency: Emergency ) => {
         const colRef = collection(db, 'emergencies');
         const data = await addDoc(colRef, emergency);
         return data.id;
     };
 
-    const handleEmergency =async ()=>{
-        try{
+    const handleEmergency = async () => {
+        try {
             await createEmergency({
-                name: user?.name,
-                lastName: user?.email,
-                signalStatus: "offline",
-                timeStamp: Date.now(),
-                location:{
-                    lat:41.4036,
-                    lng:2.1744
+                id: "",
+                name: user?.name ?? "Desconocido",
+                lastName: user?.email ?? "Desconocido",
+                signalStatus: "online",
+                location: {
+                    lat: 41.4036,
+                    lng: 2.1744
                 }
-            })
-        }catch(e){
-            console.log("error creating emergency", e)
+            });
+        } catch (e) {
+            console.log("Error creating emergency", e);
         }
-    }
+    };
+    
 
     if (!user) {
         return <p className="text-center mt-10 text-gray-500">Cargando...</p>;
