@@ -48,10 +48,8 @@ export default function Home() {
         </div>
     );
 }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 
-const styles: { [key: string]: React.CSSProperties } = {
+const styles = {
     container: {
         display: "flex",
         flexDirection: "column",
@@ -162,7 +160,3 @@ const styles: { [key: string]: React.CSSProperties } = {
         color: "#6b7280",
     },
 };
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
