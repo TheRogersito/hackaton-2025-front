@@ -25,7 +25,7 @@ export default function Emergency() {
                 ...doc.data(),
             })) as Emergency[];
 
-            setEmergencies(emergencyList);
+            setEmergencies(emergencyList); 
         });
 
         return () => unsubscribe();
