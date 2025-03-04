@@ -17,9 +17,12 @@ const EmergencyCard = ({ emergency }: { emergency: Emergency }) => {
     const mapContainerStyle = { width: "100%", height: "200px" };
     const defaultCenter = { lat: emergency.location.lat, lng: emergency.location.lng };
 
-    const handleCall =()=>{
-        qosSession()
-        alert(`Calling patient ${emergency.name} ${emergency.lastname}, the line will be prioritized for the next 10 minutes`)
+    // Obtener la clave de la API de Google Maps
+    const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+
+    if (!googleMapsApiKey) {
+        console.error("Falta la variable de entorno NEXT_PUBLIC_GOOGLE_MAPS_API_KEY");
+        return <p>Error: Falta la API Key de Google Maps</p>;
     }
 
     return (
@@ -33,7 +36,7 @@ const EmergencyCard = ({ emergency }: { emergency: Emergency }) => {
             <p>Location: {emergency.location.lat}, {emergency.location.lng}</p>
             <button onClick={handleCall}>Call patient</button>
 
-            <LoadScript googleMapsApiKey={process.env.GOOGLE_MAPS_API_KEY}>
+            <LoadScript googleMapsApiKey={googleMapsApiKey}>
                 <GoogleMap mapContainerStyle={mapContainerStyle} center={defaultCenter} zoom={15}>
                     <Marker position={defaultCenter} />
                 </GoogleMap>
@@ -42,4 +45,4 @@ const EmergencyCard = ({ emergency }: { emergency: Emergency }) => {
     );
 };
 
-export default EmergencyCard
+export default EmergencyCard;
