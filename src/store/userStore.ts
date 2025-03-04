@@ -13,6 +13,7 @@ interface User {
     signalStatus: "online" | "offline";
 }
 
+
 interface UserState {
     user: User | null;
     loading: boolean;

@@ -1,8 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { logout, signInWithGoogle } from '../../services/firebaseConfig'
+import { logout, signInWithGoogle } from '../../services/firebaseConfig';
 import { useUserStore } from "@/store/userStore";
-import { FcGoogle } from "react-icons/fc";
 import { kyc } from "@/services/kyc";
 
 export default function Register() {
@@ -39,15 +38,17 @@ export default function Register() {
                 if (kycReady.idDocumentMatch) {
                     setUser({
                         uid: user.uid,
-                        tutorName: user.displayName ?? undefined,  // Usamos undefined en lugar de null
-                        email: user.email ?? undefined,  // Usamos undefined en lugar de null
-                        photoURL: user.photoURL ?? undefined,  // Usamos undefined en lugar de null
+                        name: user.displayName ?? "Desconocido",  // Agregamos 'name'
+                        tutorName: user.displayName ?? "Desconocido",  
+                        email: user.email ?? "",  
+                        photoURL: user.photoURL ?? "",  
                         role: "sender",
+                        signalStatus: "offline", // Valor por defecto para evitar el error
                     });
 
                     router.push("/RegisterData");
-                }else{
-                    logout()
+                } else {
+                    logout();
                 }
             }
         } catch (error) {

@@ -16,6 +16,14 @@ const EmergencyCard = ({ emergency }: { emergency: Emergency }) => {
     const mapContainerStyle = { width: "100%", height: "200px" };
     const defaultCenter = { lat: emergency.location.lat, lng: emergency.location.lng };
 
+    // Obtener la clave de la API de Google Maps
+    const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+
+    if (!googleMapsApiKey) {
+        console.error("Falta la variable de entorno NEXT_PUBLIC_GOOGLE_MAPS_API_KEY");
+        return <p>Error: Falta la API Key de Google Maps</p>;
+    }
+
     return (
         <div className="border p-4 mb-4 rounded-lg shadow-lg">
             <h2 className="text-lg font-semibold">
@@ -26,7 +34,7 @@ const EmergencyCard = ({ emergency }: { emergency: Emergency }) => {
             </p>
             <p>Ubicación: {emergency.location.lat}, {emergency.location.lng}</p>
 
-            <LoadScript googleMapsApiKey={process.env.GOOGLE_MAPS_API_KEY}>
+            <LoadScript googleMapsApiKey={googleMapsApiKey}>
                 <GoogleMap mapContainerStyle={mapContainerStyle} center={defaultCenter} zoom={15}>
                     <Marker position={defaultCenter} />
                 </GoogleMap>
@@ -35,4 +43,4 @@ const EmergencyCard = ({ emergency }: { emergency: Emergency }) => {
     );
 };
 
-export default EmergencyCard
+export default EmergencyCard;
