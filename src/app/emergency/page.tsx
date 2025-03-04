@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "@/services/firebaseConfig";
+import EmergencyCard from "./EmergencyCard";
 
 interface Emergency {
     id: string;
@@ -37,17 +38,7 @@ export default function Emergency() {
             {emergencies.length === 0 ? (
                 <p className="text-gray-500">No hay emergencias registradas.</p>
             ) : (
-                emergencies.map((emergency) => (
-                    <div key={emergency.id} className="border p-4 mb-4 rounded-lg shadow-lg">
-                        <h2 className="text-lg font-semibold">
-                            {emergency.name} {emergency.lastname}
-                        </h2>
-                        <p className={`mt-2 text-3xl px-4 py-1 rounded-lg text-white ${emergency.signalStatus === "online" ? "bg-green-500" : "bg-red-500"}`}>
-                            Estado: {emergency.signalStatus === "online" ? "En línea" : "Desconectado"}
-                        </p>
-                        <p>Ubicación: {emergency.location.lat}, {emergency.location.lng}</p>
-                    </div>
-                ))
+                emergencies.map((emergency) => <EmergencyCard emergency={emergency} key={emergency.id}/>)
             )}
         </div>
     );
