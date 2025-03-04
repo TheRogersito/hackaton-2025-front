@@ -15,7 +15,7 @@ export default function Home() {
     }, [user, router]);
 
     if (!user) {
-        return <p style={styles.loadingText}>Cargando...</p>;
+        return <p className="text-center mt-10 text-gray-500">Cargando...</p>;
     }
 
     const handleLogout = async () => {
@@ -24,30 +24,31 @@ export default function Home() {
     };
 
     return (
-        <div style={styles.container}>
-            <div style={styles.header} />
-            <div style={styles.card}>
-                <h1 style={styles.title}>Bienvenido, {user.name}</h1>
-                <p style={styles.email}>{user.email}</p>
-                <p style={{ ...styles.status, backgroundColor: user.signalStatus === "online" ? "#22c55e" : "#ef4444" }}>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 relative">
+            <div className="absolute top-0 w-full h-1/3 bg-black rounded-b-xl"></div>
+            <div className="relative flex flex-col items-center p-6 bg-white shadow-lg rounded-lg w-11/12 max-w-md z-10">
+                <h1 className="text-2xl font-bold text-gray-800 mb-2">Bienvenido, {user.name}</h1>
+                <p className="text-gray-600">{user.email}</p>
+                <p className={`mt-2 py-1 px-4 rounded-full text-white ${user.signalStatus === "online" ? "bg-green-500" : "bg-red-500"}`}>
                     Estado: {user.signalStatus === "online" ? "En línea" : "Desconectado"}
                 </p>
-                <button style={styles.emergencyButton} onClick={() => router.push("/Emergency")}>
+                <button className="mt-6 bg-red-600 text-white text-lg font-semibold py-3 px-10 rounded-full shadow-lg hover:bg-red-700 transition-colors" onClick={() => router.push("/Emergency")}>
                     🚨 PEDIR AYUDA
                 </button>
-                <div style={styles.locationContainer}>
-                    <p style={styles.locationTitle}>📍 Ubicación</p>
-                    <p style={styles.locationText}>Lat: 41.4036 | Lng: 2.1744</p>
+                <div className="mt-4 flex flex-col items-center bg-gray-200 py-2 px-4 rounded-lg w-full">
+                    <p className="text-sm text-gray-700">📍 Ubicación</p>
+                    <p className="text-gray-800 font-medium">Lat: 41.4036 | Lng: 2.1744</p>
                 </div>
-                <div style={styles.buttonContainer}>
-                    <button style={styles.primaryButton}>📡 Enviar Ubicación</button>
-                    <button style={styles.secondaryButton}>🗺️ Ver Mapa</button>
+                <div className="mt-4 flex gap-4">
+                    <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors">📡 Enviar Ubicación</button>
+                    <button className="bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition-colors">🗺️ Ver Mapa</button>
                 </div>
-                <button onClick={handleLogout} style={styles.logoutText}>Cerrar sesión</button>
+                <button onClick={handleLogout} className="mt-6 text-gray-600 text-sm underline cursor-pointer">Cerrar sesión</button>
             </div>
         </div>
     );
 }
+<<<<<<< Updated upstream
 
 const styles: { [key: string]: React.CSSProperties } = {
     container: {
@@ -160,3 +161,5 @@ const styles: { [key: string]: React.CSSProperties } = {
         color: "#6b7280",
     },
 };
+=======
+>>>>>>> Stashed changes
