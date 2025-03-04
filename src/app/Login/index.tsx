@@ -5,8 +5,7 @@ import { signInWithGoogle } from "@/services/firebaseConfig";
 
 export default function Login() {
   const router = useRouter();
-  const {setUser} = useUserStore()
-
+  const setUser = useUserStore((state) => state.setUser);
 
   const handleLogin = async () => {
     try {
@@ -14,10 +13,11 @@ export default function Login() {
       if (googleUser) {
         setUser({
           uid: googleUser.uid,
-          name: googleUser.displayName,
-          email: googleUser.email,
-          photoURL: googleUser.photoURL,
+          name: googleUser.displayName || "Usuario",
+          email: googleUser.email || "correo@ejemplo.com",
+          photoURL: googleUser.photoURL || "",
           role: "sender",  // Adjust role accordingly
+          signalStatus: "offline",  // Default signal status
         });
         router.push("/home");  // Redirect after successful login
       }

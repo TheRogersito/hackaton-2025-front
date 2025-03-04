@@ -8,6 +8,12 @@ export default function Home() {
     const user = useUserStore((state) => state.user);
     const router = useRouter();
 
+    useEffect(() => {
+        if (!user) {
+            router.push("/login");
+        }
+    }, [user, router]);
+
     if (!user) {
         return <p style={styles.loadingText}>Cargando...</p>;
     }
@@ -43,7 +49,7 @@ export default function Home() {
     );
 }
 
-const styles = {
+const styles: { [key: string]: React.CSSProperties } = {
     container: {
         display: "flex",
         flexDirection: "column",

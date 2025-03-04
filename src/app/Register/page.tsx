@@ -1,24 +1,27 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { signInWithGoogle } from '../../services/firebaseConfig'
+import { signInWithGoogle } from "../../services/firebaseConfig";
 import { useUserStore } from "@/store/userStore";
-
 
 export default function Register() {
     const router = useRouter();
-    const {setUser} = useUserStore();
+    const { setUser } = useUserStore();
 
     const handleRegister = async () => {
         try {
             const user = await signInWithGoogle();
+
             if (user) {
                 setUser({
                     uid: user.uid,
-                    tutorName: user.displayName,
-                    email: user.email,
-                    photoURL: user.photoURL,
-                    role: "sender", 
-                })
+                    name: user.displayName || "Usuario", // Ajuste aquí
+                    tutorName: "", // Se deja vacío si no es requerido
+                    email: user.email || "correo@ejemplo.com",
+                    photoURL: user.photoURL || "",
+                    role: "sender", // Valor por defecto
+                    signalStatus: "offline", // Valor por defecto
+                });
+
                 router.push("/RegisterData");
             }
         } catch (error) {

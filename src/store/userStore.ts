@@ -6,6 +6,7 @@ import { doc, getDoc } from "firebase/firestore";
 interface User {
     uid: string;
     name: string;
+    tutorName?: string;
     email: string;
     photoURL: string;
     role: "sender" | "funcionario"; 
@@ -49,3 +50,6 @@ onAuthStateChanged(auth, async (firebaseUser: FirebaseUser | null) => {
         setUser(null);
     }
 });
+
+
+export default User;
