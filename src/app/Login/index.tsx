@@ -33,7 +33,7 @@ export default function Login() {
       <h1 className="text-2xl font-bold mb-4">Iniciar sesión</h1>
       <button
         onClick={handleLogin}
-        className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600"
+        className="flex items-center gap-2 bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600"
       >
           <FcGoogle className="text-xl" /> 
         Iniciar sesión con Google
