@@ -56,16 +56,14 @@ export default function Home() {
                 <p className={`mt-2 py-1 px-4 rounded-full text-white ${user.signalStatus === "online" ? "bg-green-500" : "bg-red-500"}`}>
                     Estado: {user.signalStatus === "online" ? "En línea" : "Desconectado"}
                 </p>
-                <button className="mt-6 bg-red-600 text-white text-lg font-semibold py-3 px-10 rounded-full shadow-lg hover:bg-red-700 transition-colors" onClick={handleEmergency}>
-                    🚨 PEDIR AYUDA
+                <button className="mt-6 bg-red-600 text-white text-2xl font-semibold p-28  rounded-full shadow-lg hover:bg-red-700 transition-colors" onClick={handleEmergency}>
+                    
+                    🚨<br />  PEDIR AYUDA
                 </button>
+                
                 <div className="mt-4 flex flex-col items-center bg-gray-200 py-2 px-4 rounded-lg w-full">
                     <p className="text-sm text-gray-700">📍 Ubicación</p>
                     <p className="text-gray-800 font-medium">Lat: 41.4036 | Lng: 2.1744</p>
-                </div>
-                <div className="mt-4 flex gap-4">
-                    <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors">📡 Enviar Ubicación</button>
-                    <button className="bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition-colors">🗺️ Ver Mapa</button>
                 </div>
                 <button onClick={handleLogout} className="mt-6 text-gray-600 text-sm underline cursor-pointer">Cerrar sesión</button>
             </div>
