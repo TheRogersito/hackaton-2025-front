@@ -1,4 +1,5 @@
 "use client";
+import { qosSession } from "@/services/qos";
 import { GoogleMap, Marker, LoadScript } from "@react-google-maps/api";
 
 interface Emergency {
@@ -30,9 +31,10 @@ const EmergencyCard = ({ emergency }: { emergency: Emergency }) => {
                 {emergency.name} {emergency.lastname}
             </h2>
             <p className={`mt-2 text-3xl px-4 py-1 rounded-lg text-white ${emergency.signalStatus === "online" ? "bg-green-500" : "bg-red-500"}`}>
-                Estado: {emergency.signalStatus === "online" ? "En línea" : "Desconectado"}
+                State: {emergency.signalStatus === "online" ? "En línea" : "Desconectado"}
             </p>
-            <p>Ubicación: {emergency.location.lat}, {emergency.location.lng}</p>
+            <p>Location: {emergency.location.lat}, {emergency.location.lng}</p>
+            <button onClick={handleCall}>Call patient</button>
 
             <LoadScript googleMapsApiKey={googleMapsApiKey}>
                 <GoogleMap mapContainerStyle={mapContainerStyle} center={defaultCenter} zoom={15}>
