@@ -20,9 +20,9 @@ const EmergencyCard = ({ emergency }: { emergency: Emergency }) => {
     // Obtener la clave de la API de Google Maps
     const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
-    if (!googleMapsApiKey) {
-        console.error("Falta la variable de entorno NEXT_PUBLIC_GOOGLE_MAPS_API_KEY");
-        return <p>Error: Falta la API Key de Google Maps</p>;
+    const handleCall =()=>{
+        qosSession()
+        alert(`Calling patient ${emergency.name} ${emergency.lastname}, the line will be prioritized for the next 10 minutes`)
     }
 
     return (
