@@ -49,6 +49,7 @@ export default function Home() {
     );
 }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 const styles: { [key: string]: React.CSSProperties } = {
     container: {
@@ -161,5 +162,7 @@ const styles: { [key: string]: React.CSSProperties } = {
         color: "#6b7280",
     },
 };
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
