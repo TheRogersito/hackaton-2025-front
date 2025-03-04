@@ -32,7 +32,7 @@ export default function Emergency() {
 
     return (
         <div className="p-6">
-            <h1 className="text-2xl font-bold mb-4">Emergencias Actuales</h1>
+            <h1 className="text-3xl font-bold mb-4">Emergencias Actuales</h1>
 
             {emergencies.length === 0 ? (
                 <p className="text-gray-500">No hay emergencias registradas.</p>
@@ -42,7 +42,7 @@ export default function Emergency() {
                         <h2 className="text-lg font-semibold">
                             {emergency.name} {emergency.lastname}
                         </h2>
-                        <p className={`mt-2 px-4 py-1 rounded-lg text-white ${emergency.signalStatus === "online" ? "bg-green-500" : "bg-red-500"}`}>
+                        <p className={`mt-2 text-3xl px-4 py-1 rounded-lg text-white ${emergency.signalStatus === "online" ? "bg-green-500" : "bg-red-500"}`}>
                             Estado: {emergency.signalStatus === "online" ? "En línea" : "Desconectado"}
                         </p>
                         <p>Ubicación: {emergency.location.lat}, {emergency.location.lng}</p>
