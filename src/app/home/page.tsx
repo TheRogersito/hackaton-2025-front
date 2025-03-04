@@ -1,18 +1,42 @@
 'use client';
 import { useUserStore } from "../../store/userStore";
 import { useRouter } from "next/navigation";
-import { logout } from "../../services/firebaseConfig";
+import { addDoc, collection, db, logout } from "../../services/firebaseConfig";
 import { useEffect } from "react";
 
 export default function Home() {
     const user = useUserStore((state) => state.user);
     const router = useRouter();
 
+
     useEffect(() => {
         if (!user) {
             router.push("/login");
         }
     }, [user, router]);
+
+    const createEmergency = async (emergency) => {
+        const colRef = collection(db, 'emergencies');
+        const data = await addDoc(colRef, emergency);
+        return data.id;
+    };
+
+    const handleEmergency =async ()=>{
+        try{
+            await createEmergency({
+                name: user?.name,
+                lastName: user?.email,
+                signalStatus: "offline",
+                timeStamp: Date.now(),
+                location:{
+                    lat:41.4036,
+                    lng:2.1744
+                }
+            })
+        }catch(e){
+            console.log("error creating emergency", e)
+        }
+    }
 
     if (!user) {
         return <p className="text-center mt-10 text-gray-500">Cargando...</p>;
@@ -32,7 +56,7 @@ export default function Home() {
                 <p className={`mt-2 py-1 px-4 rounded-full text-white ${user.signalStatus === "online" ? "bg-green-500" : "bg-red-500"}`}>
                     Estado: {user.signalStatus === "online" ? "En línea" : "Desconectado"}
                 </p>
-                <button className="mt-6 bg-red-600 text-white text-lg font-semibold py-3 px-10 rounded-full shadow-lg hover:bg-red-700 transition-colors" onClick={() => router.push("/Emergency")}>
+                <button className="mt-6 bg-red-600 text-white text-lg font-semibold py-3 px-10 rounded-full shadow-lg hover:bg-red-700 transition-colors" onClick={handleEmergency}>
                     🚨 PEDIR AYUDA
                 </button>
                 <div className="mt-4 flex flex-col items-center bg-gray-200 py-2 px-4 rounded-lg w-full">
