@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { signInWithGoogle } from "../../services/firebaseConfig";
+import { logout, signInWithGoogle } from '../../services/firebaseConfig'
 import { useUserStore } from "@/store/userStore";
 import { FcGoogle } from "react-icons/fc";
 import { kyc } from "@/services/kyc";
@@ -46,6 +46,8 @@ export default function Register() {
                     });
 
                     router.push("/RegisterData");
+                }else{
+                    logout()
                 }
             }
         } catch (error) {
