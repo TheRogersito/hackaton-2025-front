@@ -10,11 +10,12 @@ import { kyc } from "@/services/kyc";
 
 export default function Register() {
     const router = useRouter();
-    const {setUser} = useUserStore();
+    const { setUser } = useUserStore();
 
     const handleRegister = async () => {
         try {
             const user = await signInWithGoogle();
+
             if (user) {
             const kycPayload = {
                 phoneNumber: "+34646519770", // Placeholder, should get from user input

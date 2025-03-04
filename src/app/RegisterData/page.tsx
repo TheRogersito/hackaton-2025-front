@@ -24,15 +24,26 @@ const RegisterData = () => {
     console.log("User Data:", formData);
 
     try {
-      setUser({ ...user, ...formData }); // Update store
-      await createUser({ ...user, ...formData });
-      alert("Form submitted!");
-      router.push("/home");
+        if (!user || !user.uid) {
+            throw new Error("User is not properly initialized.");
+        }
+
+        const updatedUser = {
+            ...user,
+            ...formData,
+            uid: user.uid, // Asegura que `uid` siempre está presente
+        };
+
+        setUser(updatedUser); // Actualiza el store
+        await createUser(updatedUser);
+        alert("Form submitted!");
+        router.push("/home");
     } catch (error) {
-      console.error("Error updating user:", error);
-      alert("Failed to submit form.");
+        console.error("Error updating user:", error);
+        alert("Failed to submit form.");
     }
-  };
+};
+
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">

@@ -7,8 +7,7 @@ import { FcGoogle } from "react-icons/fc";
 
 export default function Login() {
   const router = useRouter();
-  const {setUser} = useUserStore()
-
+  const setUser = useUserStore((state) => state.setUser);
 
   const handleLogin = async () => {
     try {
@@ -16,10 +15,11 @@ export default function Login() {
       if (googleUser) {
         setUser({
           uid: googleUser.uid,
-          name: googleUser.displayName,
-          email: googleUser.email,
-          photoURL: googleUser.photoURL,
+          name: googleUser.displayName || "Usuario",
+          email: googleUser.email || "correo@ejemplo.com",
+          photoURL: googleUser.photoURL || "",
           role: "sender",  // Adjust role accordingly
+          signalStatus: "offline",  // Default signal status
         });
         router.push("/home");  // Redirect after successful login
       }
@@ -33,7 +33,7 @@ export default function Login() {
       <h1 className="text-2xl font-bold mb-4">Iniciar sesión</h1>
       <button
         onClick={handleLogin}
-        className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600"
+        className="flex items-center gap-2 bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600"
       >
           <FcGoogle className="text-xl" /> 
         Iniciar sesión con Google
